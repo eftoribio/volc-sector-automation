@@ -2,7 +2,7 @@ import os
 from PyQt5.QtCore import QVariant
 
 # Define path to folder containing shapefiles
-shapefolder = r'D:/Documents/2nd Sem/Geol 200/split_indiv_points'
+shapefolder = r'dir/split_indiv_points'
 
 # Create empty list to hold shapefile paths
 shapeList = []
@@ -52,22 +52,22 @@ for index, shapefile in enumerate(shapeList):
 
 # Merge all wedge layers into a single layer
 listLayers = QgsProject.instance().mapLayersByName('output')
-processing.runAndLoadResults("native:mergevectorlayers", {'LAYERS': listLayers,'CRS':None,'OUTPUT':'D:/Documents/2nd Sem/Geol 200/split_centroids/merged/Merged.shp'})
+processing.runAndLoadResults("native:mergevectorlayers", {'LAYERS': listLayers,'CRS':None,'OUTPUT':'dir/split_centroids/merged/Merged.shp'})
 
 # First, we merge all output shapefiles into one
 listLayers = QgsProject.instance().mapLayersByName('output')
 processing.runAndLoadResults("native:mergevectorlayers", 
-    {'LAYERS': listLayers,'CRS':None,'OUTPUT':'D:/Documents/2nd Sem/Geol 200/split_centroids/merged/Merged.shp'})
+    {'LAYERS': listLayers,'CRS':None,'OUTPUT':'dir/split_centroids/merged/Merged.shp'})
 
 # Next, we split the merged shapefile by the CLASS_NAME attribute
 processing.run("native:splitvectorlayer", 
-    {'INPUT':'D:/Documents/2nd Sem/Geol 200/split_centroids/merged/Merged.shp',
+    {'INPUT':'dir/split_centroids/merged/Merged.shp',
      'FIELD':'CLASS_NAME',
      'FILE_TYPE':1,
-     'OUTPUT':'D:/Documents/2nd Sem/Geol 200/split_centroids/split_sectors'})
+     'OUTPUT':'dir/split_centroids/split_sectors'})
 
 # Then, we search for all shapefiles in the split_sectors folder and add them to the QGIS project
-shapefolder = r'D:/Documents/2nd Sem/Geol 200/split_centroids/split_sectors'
+shapefolder = r'dir/split_centroids/split_sectors'
 shapeList = []
 for root, folder, files in os.walk(shapefolder):
     for file in files: # For all files in shapefolder, including files in subdirectories
@@ -83,22 +83,22 @@ for index, shapefile in enumerate(shapeList):
 # We then merge all rotated shapefiles into one
 listRotated = QgsProject.instance().mapLayersByName('rotated')
 processing.runAndLoadResults("native:mergevectorlayers", 
-    {'LAYERS': listLayers,'CRS':None,'OUTPUT':'D:/Documents/2nd Sem/Geol 200/split_centroids/merged/Rotated_Merged.shp'})
+    {'LAYERS': listLayers,'CRS':None,'OUTPUT':'dir/split_centroids/merged/Rotated_Merged.shp'})
 
 # After that, we perform an intersection between the rotated merged shapefile and rois_merged shapefile
 processing.runAndLoadResults("native:intersection",
-    {'INPUT': 'D:/Documents/2nd Sem/Geol 200/split_centroids/merged/Rotated_Merged.shp',
-     'OVERLAY':'D:/Documents/2nd Sem/Geol 200/rois_merged.shp',
+    {'INPUT': 'dir/split_centroids/merged/Rotated_Merged.shp',
+     'OVERLAY':'dir/rois_merged.shp',
      'INPUT_FIELDS':[],
      'OVERLAY_FIELDS':[],
      'OVERLAY_FIELDS_PREFIX':'',
-     'OUTPUT':'D:/Documents/2nd Sem/Geol 200/split_centroids/merged/rois_intersected.shp'})
+     'OUTPUT':'dir/split_centroids/merged/rois_intersected.shp'})
 
 # Lastly, we compute zonal statistics for the intersected shapefile and the macolod_slope raster
 processing.runAndLoadResults("native:zonalstatisticsfb", 
-    {'INPUT':'D:/Documents/2nd Sem/Geol 200/split_centroids/merged/rois_intersected.shp',
-     'INPUT_RASTER':'D:/Documents/2nd Sem/Geol 200/macolod_slope',
+    {'INPUT':'dir/split_centroids/merged/rois_intersected.shp',
+     'INPUT_RASTER':'dir/macolod_slope',
      'RASTER_BAND':1,
      'COLUMN_PREFIX':'sector_',
      'STATISTICS':[2,3,4,5,6,7],
-     'OUTPUT':'D:/Documents/2nd Sem/Geol 200/split_centroids/merged/zonalstatistics.shp'})
+     'OUTPUT':'dir/split_centroids/merged/zonalstatistics.shp'})
