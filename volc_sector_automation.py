@@ -28,8 +28,24 @@ for index, shapefile in enumerate(shapeList):
     for feature in vlayer.getFeatures():
         AzimAxisBa = feature["AzimAxisBa"]
     
+    #
     # Create wedges for each sector and add them to the map
     # Code in the next 7 lines is based on work by Luisa V. Lucchese (2022) https://gist.github.com/luisalucchese/36dc6fed3cb7800c79c9870e12a17426#file-examples_wedge_sectors-py
+
+    # MIT License
+
+    # Copyright (c) 2022 Luisa V. Lucchese
+
+    #Permission is hereby granted, free of charge, to any person obtaining a copy
+    #of this software and associated documentation files (the "Software"), to deal
+    #in the Software without restriction, including without limitation the rights
+    #to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    #copies of the Software, and to permit persons to whom the Software is
+    #furnished to do so, subject to the following conditions:
+
+    #The above copyright notice and this permission notice shall be included in all
+    #copies or substantial portions of the Software.
+    #         
     numsectors=24
     width=360.0/numsectors
     for k in range(0,numsectors):
@@ -94,10 +110,10 @@ processing.runAndLoadResults("native:intersection",
      'OVERLAY_FIELDS_PREFIX':'',
      'OUTPUT':'dir/split_centroids/merged/rois_intersected.shp'})
 
-# Lastly, we compute zonal statistics for the intersected shapefile and the macolod_slope raster
+# Lastly, we compute zonal statistics for the intersected shapefile and the slope raster
 processing.runAndLoadResults("native:zonalstatisticsfb", 
     {'INPUT':'dir/split_centroids/merged/rois_intersected.shp',
-     'INPUT_RASTER':'dir/macolod_slope',
+     'INPUT_RASTER':'dir/slope',
      'RASTER_BAND':1,
      'COLUMN_PREFIX':'sector_',
      'STATISTICS':[2,3,4,5,6,7],
