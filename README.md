@@ -1,6 +1,6 @@
 # PyQGIS Script for Automating Volcano Base Sectorization
 
-This script merges, splits, rotates, and intersects shapefiles to automate the sectorization of volcano bases. The method used is based on [Vörös et al. (2022)](https://doi.org/10.3390/rs13101983).
+This PyQGIS script merges, splits, rotates, and intersects shapefiles to automate the sectorization of volcano bases. The method used is based on [Vörös et al. (2022)](https://doi.org/10.3390/rs13101983).
 
 This was developed for my undergraduate thesis. For more information visit the [data visualization repo](https://github.com/eftoribio/eftoribio-thesis-dataviz).
 
