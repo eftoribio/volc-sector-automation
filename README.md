@@ -24,7 +24,7 @@ The result is one polygon shapefile containing the sectorized volcano edifice ou
 *Lucchese, L. (2022). Generates "numsectors" circular sectors with the same width and varying radius [Source code]. https://gist.githubusercontent.com/luisalucchese/a8265f1247e770d832db806b853d8660/raw/6f8c4696a8a230f395163dc86c0abad0e98ebd95/examples_wedge_sectors_radius.py*
 
 *Vörös, F., van Wyk de Vries, B., Karátson, D., & Székely, B. (2021). DTM-Based Morphometric Analysis of Scoria Cones of the Chaîne des Puys (France)—The Classic and a New Approach. Remote Sensing, 13(10), 1983. https://doi.org/10.3390/rs13101983*
-*
+
 ## License
 
 [MIT](https://github.com/eftoribio/volc-sector-automation/blob/main/LICENSE)
