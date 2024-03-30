@@ -10,7 +10,7 @@ This was developed for my undergraduate thesis. For more information visit the [
 - Azimuth of the maximum base diameter that passes through the summit point stored as *AzimAxisBa*
 - Slope raster from which zonal statistics will be computed
 ## Description
-First, the path to the folder containing the individual summit point shapefiles is defined. A for-loop walks through all the shapefiles in the folder and append each file to a list.
+First, the path to the folder containing the individual summit point shapefiles is defined. A for-loop walks through all the shapefiles in the folder and appends each file to a list.
 
 A nested for-loop then iterates over each shapefile in the list, adding each point to QGIS as a vector layer. The first for-loop within this nested for-loop obtains the azimuth of the maximum base diameter that passes through the summit point (AzimAxisBaseMax). This is a parameter that should already be present in the shapefiles' *AzimAxisBa* field. The second for-loop creates the sectors one-by-one using the Create Wedge Buffers tool of QGIS and is based on the code of Lucchese (2022).
 
